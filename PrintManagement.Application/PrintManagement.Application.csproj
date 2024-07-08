@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Handle\HandleEmail\" />
+    <Folder Include="Handle\HandleFile\" />
+    <Folder Include="InterfaceServices\" />
+    <Folder Include="ImplementServices\" />
+    <Folder Include="Payloads\Mappers\AutoMapperProfiles\" />
+    <Folder Include="Payloads\RequestModels\" />
+    <Folder Include="Payloads\ResponseModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PrintManagement.Domain\PrintManagement.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
