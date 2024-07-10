@@ -15,7 +15,7 @@ namespace PrintManagement.Domain.Entities
         public string Avatar { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public int TeamId { get; set; }
+        public Guid TeamId { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTIme { get; set; }
         public bool IsActive { get; set; }
@@ -29,5 +29,7 @@ namespace PrintManagement.Domain.Entities
         public virtual List<Project> Projects { get; set; }
         public virtual List<KeyPerformanceIndicators> KeyPerformanceIndicators { get; set;}
         public virtual List<Permissions> Permissions { get; set; }
+        public virtual List<RefreshToken> RefreshTokens { get; set; }
+        public virtual List<ConfirmEmail> ConfirmEmails { get; set; }
     }
 }

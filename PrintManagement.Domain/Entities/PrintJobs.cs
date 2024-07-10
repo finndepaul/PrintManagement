@@ -9,7 +9,7 @@ namespace PrintManagement.Domain.Entities
 {
 	public class PrintJobs : BaseEntity
 	{
-        public int DesignId { get; set; }
+        public Guid DesignId { get; set; }
         public PrintJobStatus PrintJobStatus { get; set; }
 
 		// khóa ngoại

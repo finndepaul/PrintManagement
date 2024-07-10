@@ -10,6 +10,6 @@ namespace PrintManagement.Infrastructure.Database.DataContexts
 	public interface IDbContext : IDisposable
 	{
 		DbSet<TEntity> SetEntity<TEntity>() where TEntity : class;
-		Task<int> CommitChangesAsync();
+		Task<int> CommitChangesAsync(CancellationToken cancellationToken);
 	}
 }

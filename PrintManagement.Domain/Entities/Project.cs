@@ -12,9 +12,9 @@ namespace PrintManagement.Domain.Entities
         public string ProjectName { get; set; }
         public string RequestDescriptionFromCustomer { get; set; }
         public DateTime StartDate { get; set; }
-        public int EmployeeId { get; set; } //Nhân viên phụ trách project
+        public Guid EmployeeId { get; set; } //Nhân viên phụ trách project
         public DateTime ExpectedEndDate { get; set; }
-        public int CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
         public ProjectStatus ProjectStatus { get; set; } //đang thiết kế, đang in, đã hoàn thành
 
 		// khóa ngoại
@@ -22,5 +22,6 @@ namespace PrintManagement.Domain.Entities
         public virtual List<Design> Designs { get; set; }
 		public virtual List<Delivery> Deliveries { get; set; }
 		public virtual Customer Customer { get; set; }
+        public virtual List<Bill> Bills { get; set; }
     }
 }

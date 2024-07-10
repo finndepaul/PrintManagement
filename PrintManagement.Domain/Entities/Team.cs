@@ -13,7 +13,7 @@ namespace PrintManagement.Domain.Entities
         public int NumberOfMember { get; set; }
 		public DateTime CreateTime { get; set; }
 		public DateTime UpdateTime { get; set; }
-        public int ManagerId { get; set; }
+        public Guid ManagerId { get; set; }
 
 		// khóa ngoại
 		public virtual List<User> Users { get; set; }

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PrintManagement.Domain.Entities
 {
-    public class Permissions : BaseEntity
-    {
-        public Guid UserId { get; set; }
-        public Guid RoleId { get; set; }
+	public class RefreshToken : BaseEntity
+	{
+		public Guid UserId { get; set; }
+		public string Token { get; set; }
+		public DateTime ExpiryTime { get; set; }
 
 		// khóa ngoại
 		public virtual User User { get; set; }
-        public virtual Role Role { get; set; }
-    }
+	}
 }

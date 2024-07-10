@@ -8,7 +8,7 @@ namespace PrintManagement.Domain.Entities
 {
 	public class ResourcePropertyDetail : BaseEntity
 	{
-        public int PropertyId { get; set; }
+        public Guid PropertyId { get; set; }
         public string PropertyDetailName { get; set; }
         public string Image { get; set; }
         public decimal Price { get; set; }

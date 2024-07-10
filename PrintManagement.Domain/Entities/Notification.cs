@@ -8,7 +8,7 @@ namespace PrintManagement.Domain.Entities
 {
 	public class Notification : BaseEntity
 	{
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public string Content { get; set; }
         public string Link { get; set; }
         public DateTime CreateTime { get; set; }

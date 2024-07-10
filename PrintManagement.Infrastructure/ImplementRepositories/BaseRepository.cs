@@ -31,21 +31,21 @@ namespace PrintManagement.Infrastructure.ImplementRepositories
 			_IDbContext = DbContext;
 			_dbContext = (DbContext)DbContext;
 		}
-		public async Task<int> CountAsync(Expression<Func<TEntity, bool>> expression = null)
+		public async Task<int> CountAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken)
 		{
 			IQueryable<TEntity> query = expression != null ? DBSet.Where(expression) : DBSet;
-			return await query.CountAsync();
+			return await query.CountAsync(cancellationToken);
 		}
 
-		public async Task<int> CountAsync(string include, Expression<Func<TEntity, bool>> expression = null)
+		public async Task<int> CountAsync(string include, Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken)
 		{
 			IQueryable<TEntity> query;
 			if (!string.IsNullOrEmpty(include))
 			{
 				query = BuildQueryable(new List<string> { include }, expression);
-				return await query.CountAsync();
+				return await query.CountAsync(cancellationToken);
 			}
-			return await CountAsync(expression);
+			return await CountAsync(expression, cancellationToken);
 		}
 		protected IQueryable<TEntity> BuildQueryable(List<string> includes, Expression<Func<TEntity, bool>> expression)
 		{
@@ -63,76 +63,76 @@ namespace PrintManagement.Infrastructure.ImplementRepositories
 			}
 			return query;
 		}
-		public async Task<TEntity> CreateAsync(TEntity entity)
+		public async Task<TEntity> CreateAsync(TEntity entity, CancellationToken cancellationToken)
 		{
-			DBSet.Add(entity);
-			await _IDbContext.CommitChangesAsync();
+			await DBSet.AddAsync(entity);
+			await _IDbContext.CommitChangesAsync(cancellationToken);
 			return entity;
 		}
 
-		public async Task<IEnumerable<TEntity>> CreateAsync(IEnumerable<TEntity> entities)
+		public async Task<IEnumerable<TEntity>> CreateAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken)
 		{
-			DBSet.AddRange(entities);
-			await _IDbContext.CommitChangesAsync();
+			await DBSet.AddRangeAsync(entities);
+			await _IDbContext.CommitChangesAsync(cancellationToken);
 			return entities;
 		}
 
-		public async Task DeleteAsync(int id)
+		public async Task DeleteAsync(int id, CancellationToken cancellationToken)
 		{
 			var model = await DBSet.FindAsync(id);
 			if (model != null)
 			{
 				DBSet.Remove(model);
-				await _IDbContext.CommitChangesAsync();
+				await _IDbContext.CommitChangesAsync(cancellationToken);
 			}
 		}
 
-		public async Task DeleteAsync(Expression<Func<TEntity, bool>> expression)
+		public async Task DeleteAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken)
 		{
 			IQueryable<TEntity> query = expression != null ? DBSet.Where(expression) : DBSet;
             var dataQuery = query;
             if (dataQuery != null)
             {
                 DBSet.RemoveRange(dataQuery);
-                await _IDbContext.CommitChangesAsync();
+                await _IDbContext.CommitChangesAsync(cancellationToken);
             }
 		}
 
-		public async Task<IQueryable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression = null)
+		public async Task<IQueryable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken)
 		{
 			IQueryable<TEntity> query = expression != null ? DBSet.Where(expression) : DBSet;
-			return query;
+			return query.AsNoTracking();
 		}
 
-		public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression)
+		public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken)
 		{
-			return await DBSet.FirstOrDefaultAsync(expression);
+			return await DBSet.FirstOrDefaultAsync(expression, cancellationToken);
 		}
 
-		public async Task<TEntity> GetByIdAsync(int id)
+		public async Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken)
 		{
-			return await DBSet.FindAsync(id);
+			return await DBSet.FindAsync(id, cancellationToken);
 		}
 
-		public async Task<TEntity> GetByIdAsync(Expression<Func<TEntity, bool>> expression = null)
+		public async Task<TEntity> GetByIdAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken)
 		{
-			return await DBSet.FirstOrDefaultAsync(expression);
+			return await DBSet.FirstOrDefaultAsync(expression, cancellationToken);
 		}
 
-		public async Task<TEntity> UpdateAsync(TEntity entity)
+		public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken)
 		{
 			_dbContext.Entry(entity).State = EntityState.Modified;
-			await _IDbContext.CommitChangesAsync();
+			await _IDbContext.CommitChangesAsync(cancellationToken);
 			return entity;
 		}
 
-		public async Task<IEnumerable<TEntity>> UpdateAsync(IEnumerable<TEntity> entities)
+		public async Task<IEnumerable<TEntity>> UpdateAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken)
 		{
 			foreach (var entity in entities)
 			{
 				_dbContext.Entry(entity).State = EntityState.Modified;
 			}
-			await _IDbContext.CommitChangesAsync();
+			await _IDbContext.CommitChangesAsync(cancellationToken);
 			return entities;
 		}
 	}

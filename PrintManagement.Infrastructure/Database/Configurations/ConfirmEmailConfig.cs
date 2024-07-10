@@ -9,18 +9,16 @@ using System.Threading.Tasks;
 
 namespace PrintManagement.Infrastructure.Database.Configurations
 {
-	public class BillConfig : IEntityTypeConfiguration<Bill>
+	public class ConfirmEmailConfig : IEntityTypeConfiguration<ConfirmEmail>
 	{
-		public void Configure(EntityTypeBuilder<Bill> builder)
+		public void Configure(EntityTypeBuilder<ConfirmEmail> builder)
 		{
-			builder.ToTable("Bill");
+			builder.ToTable("ConfirmEmail");
 			builder.HasKey(x => x.Id);
 			builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
 			//
-			builder.HasOne(x => x.Customer).WithMany(x => x.Bills).HasForeignKey(x => x.CustomerId);
-			builder.HasOne(x => x.User).WithMany(x => x.Bills).HasForeignKey(x => x.EmployeeId);
-			builder.HasOne(x => x.Project).WithMany(x => x.Bills).HasForeignKey(x => x.ProjectId);
+			builder.HasOne(x => x.User).WithMany(x => x.ConfirmEmails).HasForeignKey(x => x.UserId);
 		}
 	}
 }

@@ -8,8 +8,8 @@ namespace PrintManagement.Domain.Entities
 {
 	public class ResourceForPrintJob : BaseEntity
 	{
-        public int ResourcePropertyDetailId { get; set; }
-        public int PrintJobId { get; set; }
+        public Guid ResourcePropertyDetailId { get; set; }
+        public Guid PrintJobId { get; set; }
 
 		// khóa ngoại
 		public virtual ResourcePropertyDetail ResourcePropertyDetail { get; set; }

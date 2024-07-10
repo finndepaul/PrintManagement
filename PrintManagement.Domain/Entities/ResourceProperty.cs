@@ -9,7 +9,7 @@ namespace PrintManagement.Domain.Entities
 	public class ResourceProperty : BaseEntity
 	{
 		public string ResourcePropertyName { get; set; }
-        public int ResourceId { get; set; }
+        public Guid ResourceId { get; set; }
         public int Quantity { get; set; }
 
 		// khóa ngoại
