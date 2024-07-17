@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using PrintManagement.API.Extensions;
 using PrintManagement.Application.InterfaceServices;
 using PrintManagement.Application.Payloads.RequestModels.UserRequests;
+using PrintManagement.Application.Payloads.ResponseModels.DataUsers;
+using PrintManagement.Application.Payloads.Responses;
 
 namespace PrintManagement.API.Controllers
 {
-	[Route(Constant.DefaultValue.DEFAULT_CONTROLLER_ROUTE)]
+	[Route(Constants.DefaultValue.DEFAULT_CONTROLLER_ROUTE)]
 	[ApiController]
 	public class AuthController : ControllerBase
 	{
@@ -21,10 +23,15 @@ namespace PrintManagement.API.Controllers
 		{
 			return Ok(await _authService.Register(request, cancellationToken));
 		}
-		[HttpPost]
+		[HttpGet]
 		public async Task<IActionResult> ConfirmRegisterAccount(string confirmCode, CancellationToken cancellationToken)
 		{
 			return Ok(await _authService.ConfirmRegisterAccount(confirmCode, cancellationToken));
+		}
+		[HttpPost]
+		public async Task<IActionResult> Login(LoginRequest request, CancellationToken cancellationToken)
+		{
+			return Ok(await _authService.Login(request, cancellationToken));
 		}
 	}
 }

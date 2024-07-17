@@ -7,18 +7,11 @@ using System.Threading.Tasks;
 
 namespace PrintManagement.Application.Payloads.RequestModels.UserRequests
 {
-	public class RegisterRequest
+	public class LoginRequest
 	{
 		[Required(ErrorMessage = "User Name field is required")]
 		public string UserName { get; set; }
 		[Required(ErrorMessage = "Password field is required")]
 		public string Password { get; set; }
-		[Required(ErrorMessage = "Full Name field is required")]
-		public string FullName { get; set; }
-		public DateTime? DateOfBirth { get; set; }
-		[Required(ErrorMessage = "Email field is required")]
-		public string Email { get; set; }
-		[Required(ErrorMessage = "Phone Number field is required")]
-		public string PhoneNumber { get; set; }
 	}
 }

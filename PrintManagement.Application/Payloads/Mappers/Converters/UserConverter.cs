@@ -28,8 +28,7 @@ namespace PrintManagement.Application.Payloads.Mappers.Converters
 				FullName = user.FullName,
 				PhoneNumber = user.PhoneNumber,
 				CreateTime = user.CreateTime,
-				UpdateTIme = user.UpdateTIme,
-				TeamName = user.TeamId != null ? await _userRepository.GetTeamNameAsync(user.TeamId, cancellationToken) : null,
+				UpdateTIme = user.UpdateTime,
 				IsActive = user.IsActive,
 			};
 		}

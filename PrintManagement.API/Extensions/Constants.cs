@@ -1,6 +1,6 @@
 ﻿namespace PrintManagement.API.Extensions
 {
-    public class Constant
+    public class Constants
     {
         public class AppSettingKeys
         {

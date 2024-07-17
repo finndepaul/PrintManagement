@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace PrintManagement.Application.InterfaceServices
 {
-	public interface IAuthService
+	public interface IUserService
 	{
-		Task<ResponseObject<DataResponseUser>> Register(RegisterRequest request, CancellationToken cancellationToken);
-		Task<string> ConfirmRegisterAccount(string confirmCode, CancellationToken cancellationToken); 
-		Task<ResponseObject<DataResponseLogin>> Login(LoginRequest request, CancellationToken cancellationToken);
+		Task<string> ForgetPassword(string email, CancellationToken cancellationToken);
+		Task<string> ConfirmCreateNewPassword(CreateNewPasswordRequest request, CancellationToken cancellationToken);
+		Task<ResponseObject<DataResponseUser>> ChangePassword(Guid userId, ChangePasswordRequest request, CancellationToken cancellationToken);
 	}
 }

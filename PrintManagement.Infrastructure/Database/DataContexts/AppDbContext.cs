@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace PrintManagement.Infrastructure.Database.DataContexts
 {
@@ -119,10 +120,10 @@ namespace PrintManagement.Infrastructure.Database.DataContexts
 						DateOfBirth = DateTime.Now,
 						FullName = "Bùi Duy Đông",
 						Email = "abc@gmail.com",
-						Password = "abc",
-						PhoneNumber = "1234567890",
+						UserName = "dong",
+						Password = BCryptNet.HashPassword("abc"),
+						PhoneNumber = "0934567891",
 						TeamId = Guid.Parse("471c942c-c8dc-4909-90de-3b1f153212aa"),
-						UserName = "abc",
 					},
 					new User
 					{
@@ -132,11 +133,11 @@ namespace PrintManagement.Infrastructure.Database.DataContexts
 						CreateTime = DateTime.Now,
 						DateOfBirth = DateTime.Now,
 						FullName = "Nguyễn Nhật Mai",
-						Email = "abcd@gmail.com",
-						Password = "mai",
-						PhoneNumber = "1234567890",
+						Email = "mai@gmail.com",
+						UserName = "mai",
+						Password = BCryptNet.HashPassword("mai"),
+						PhoneNumber = "0934567890",
 						TeamId = Guid.Parse("6f8624c1-d28f-43f3-9465-bee9d20ecbf6"),
-						UserName = "mai"
 					}
 				);
 			// Permissions

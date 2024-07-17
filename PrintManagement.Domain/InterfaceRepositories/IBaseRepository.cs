@@ -11,11 +11,11 @@ namespace PrintManagement.Domain.InterfaceRepositories
 	{
 		Task<IQueryable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken);
 		Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken);
-		Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken);
+		Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 		Task<TEntity> GetByIdAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken);
 		Task<TEntity> CreateAsync(TEntity entity, CancellationToken cancellationToken);
 		Task<IEnumerable<TEntity>> CreateAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken);
-		Task DeleteAsync(int id, CancellationToken cancellationToken);
+		Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 		Task DeleteAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken);
 		Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken);
 		Task<IEnumerable<TEntity>> UpdateAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken);

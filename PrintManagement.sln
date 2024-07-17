@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrintManagement.Application
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{ABDCCF8D-0FFF-490B-AB9B-30A439CE6848}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintManagement.Client", "PrintManagement.Client\PrintManagement.Client.csproj", "{DACF8BA8-6886-4D49-855B-0B52CDBA667D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrintManagement.Client", "PrintManagement.Client\PrintManagement.Client.csproj", "{DACF8BA8-6886-4D49-855B-0B52CDBA667D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

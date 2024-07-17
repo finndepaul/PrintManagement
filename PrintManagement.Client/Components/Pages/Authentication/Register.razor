@@ -1,0 +1,28 @@
+﻿@page "/register"
+@using PrintManagement.Client.Components.Layout
+@layout LoginLayout
+
+<MudGrid Class="d-flex justify-center mt-5">
+	<MudItem xs="5" sm="4">
+		<MudPaper Class="pa-4">
+			<MudForm>
+				<h2 class="d-flex justify-center">Login</h2>
+				<MudTextField T="string" @bind-Value="username" Label="Username" Required="true" RequiredError="User name is required!" />
+				<MudTextField T="string" @bind-Value="password" Label="Password" HelperText="Choose a strong password"
+							  InputType="InputType.Password" Required="true"
+							  RequiredError="Password is required!" />
+				<MudTextField T="string" @bind-Value="fullName" Label="Full-Name" Required="true" RequiredError="Full-Name is required!" />
+				<MudDatePicker Label="Date Of Birth" @bind-Date="dateOfBirth" />
+				<MudTextField T="string" @bind-Value="email" Label="Email" Required="true" RequiredError="Email is required!" />
+				<MudTextField T="string" @bind-Value="phoneNumber" Label="Phone Number" Required="true" RequiredError="Phone Number is required!" />
+				<div class="d-flex justify-center mt-2">
+					<MudButton OnClick="HandleRegister" Variant="Variant.Filled" Color="Color.Secondary">Đăng ký</MudButton>
+				</div>
+				<div class="d-flex justify-center mt-2">
+					Đã có tài khoản?
+					<MudLink class="ms-1 mb-2" Typo="Typo.body2" Href="/">Đăng nhập</MudLink>
+				</div>
+			</MudForm>
+		</MudPaper>
+	</MudItem>
+</MudGrid>

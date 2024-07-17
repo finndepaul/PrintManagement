@@ -21,10 +21,14 @@ namespace PrintManagement.API.Extensions
 		{
 			services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();	
 			services.AddScoped<IBaseRepository<ConfirmEmail>, BaseRepository<ConfirmEmail>>();	
+			services.AddScoped<IBaseRepository<Role>, BaseRepository<Role>>();	
+			services.AddScoped<IBaseRepository<RefreshToken>, BaseRepository<RefreshToken>>();	
+			services.AddScoped<IBaseRepository<Permissions>, BaseRepository<Permissions>>();	
 
 			services.AddScoped<IDbContext, AppDbContext>();
 			services.AddTransient<IEmailService, EmailService>(); // xóa using mailkit
 			services.AddTransient<IAuthService, AuthService>();
+			services.AddTransient<IUserService, UserService>();
 			services.AddTransient<IUserRepository, UserRepository>();
 			services.AddTransient<UserConverter>();
 

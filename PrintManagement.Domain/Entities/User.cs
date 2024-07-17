@@ -11,19 +11,19 @@ namespace PrintManagement.Domain.Entities
         public string UserName { get; set; }
         public string Password { get; set; }
         public string FullName { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string Avatar { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public Guid TeamId { get; set; }
+        public Guid? TeamId { get; set; }
         public DateTime CreateTime { get; set; }
-        public DateTime UpdateTIme { get; set; }
+        public DateTime UpdateTime { get; set; }
         public bool IsActive { get; set; }
 
         // khóa ngoại
         public virtual List<Notification> Notifications { get; set; }
         public virtual List<Bill> Bills { get; set; }
-        public virtual Team Team { get; set; }
+        public virtual Team? Team { get; set; }
         public virtual List<Design> Designs { get; set; }
         public virtual List<ImportCoupon> ImportCoupons { get; set;}
         public virtual List<Project> Projects { get; set; }

@@ -1,0 +1,20 @@
+﻿@page "/confirm-register"
+@using PrintManagement.Client.Components.Layout
+@layout LoginLayout
+
+<MudGrid Class="d-flex justify-center mt-5">
+	<MudItem xs="5" sm="4">
+		<MudPaper Class="pa-4">
+			<MudForm>
+				<h2 class="d-flex justify-center">Xác nhận đăng ký</h2>
+				<MudTextField T="string" @bind-Value="code" Label="Confirm Code" Required="true" RequiredError="ConfirmCode is required!" />
+				<div class="d-flex align-center justify-space-between mt-3">
+					<MudButton Variant="Variant.Filled" Href="/register">Quay lại</MudButton>
+					<MudButton OnClick="ConfirmReigster" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Xác nhận</MudButton>
+				</div>
+			</MudForm>
+		</MudPaper>
+	</MudItem>
+</MudGrid>
+
+

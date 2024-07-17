@@ -77,7 +77,7 @@ namespace PrintManagement.Infrastructure.ImplementRepositories
 			return entities;
 		}
 
-		public async Task DeleteAsync(int id, CancellationToken cancellationToken)
+		public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
 		{
 			var model = await DBSet.FindAsync(id);
 			if (model != null)
@@ -109,7 +109,7 @@ namespace PrintManagement.Infrastructure.ImplementRepositories
 			return await DBSet.FirstOrDefaultAsync(expression, cancellationToken);
 		}
 
-		public async Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken)
+		public async Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken)
 		{
 			return await DBSet.FindAsync(id, cancellationToken);
 		}
