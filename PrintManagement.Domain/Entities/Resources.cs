@@ -10,7 +10,7 @@ namespace PrintManagement.Domain.Entities
 	public class Resources : BaseEntity
 	{
         public string ResourceName { get; set; }
-        public string Ịmage { get; set; }
+        public string? Image { get; set; }
         public ResourceType ResourceType { get; set; }
         public int AvailableQuantity { get; set; }
         public ResourceStatus ResourceStatus { get; set; } // sẵn sàng sử dụng, cần bảo trì

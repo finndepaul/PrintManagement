@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Org.BouncyCastle.Asn1.Ocsp;
 using PrintManagement.Application.Payloads.RequestModels.UserRequests;
-using PrintManagement.Application.Payloads.ResponseModels.DataUsers;
+using PrintManagement.Application.Payloads.ResponseModels;
 using PrintManagement.Application.Payloads.Responses;
 using PrintManagement.Client.Extensions;
 using PrintManagement.Client.Services.Interface;

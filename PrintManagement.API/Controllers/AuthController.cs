@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PrintManagement.API.Extensions;
 using PrintManagement.Application.InterfaceServices;
 using PrintManagement.Application.Payloads.RequestModels.UserRequests;
-using PrintManagement.Application.Payloads.ResponseModels.DataUsers;
+using PrintManagement.Application.Payloads.ResponseModels;
 using PrintManagement.Application.Payloads.Responses;
 
 namespace PrintManagement.API.Controllers

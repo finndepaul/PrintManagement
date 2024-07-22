@@ -8,7 +8,8 @@ namespace PrintManagement.Domain.Enumerates
 {
 	public enum DeliveryStatus
 	{
-		Inprogress = 0,
-		Deliveried = 1,
+		Waiting = 0,
+		Delivering = 1,
+		Deliveried = 2,
 	}
 }

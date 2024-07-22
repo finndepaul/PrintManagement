@@ -4,18 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrintManagement.Domain.Entities
+namespace PrintManagement.Application.Payloads.RequestModels.CustomerRequests
 {
-    public class Customer : BaseEntity
+    public class CustomerCreateRequest
     {
         public string FullName { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
 
-		// khóa ngoại
-		public virtual List<Delivery> Deliveries { get; set; }
-        public virtual List<Bill> Bills { get; set; }
-        public virtual List<Project> Projects { get; set; }
     }
 }

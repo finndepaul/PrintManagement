@@ -1,4 +1,5 @@
-﻿using PrintManagement.Application.Payloads.ResponseModels.DataUsers;
+﻿using PrintManagement.Application.Payloads.RequestModels.TeamRequests;
+using PrintManagement.Application.Payloads.ResponseModels;
 using PrintManagement.Domain.Entities;
 using PrintManagement.Domain.InterfaceRepositories;
 using System;
@@ -9,16 +10,9 @@ using System.Threading.Tasks;
 
 namespace PrintManagement.Application.Payloads.Mappers.Converters
 {
-	public class UserConverter
+    public class UserConverter
 	{
-		private readonly IUserRepository _userRepository;
-
-		public UserConverter(IUserRepository userRepository)
-		{
-			_userRepository = userRepository;
-		}
-
-		public async Task<DataResponseUser> EntityToDTOAsync(User user, CancellationToken cancellationToken)
+		public async Task<DataResponseUser> EntityToDTOAsync(User user)
 		{
 			return new DataResponseUser
 			{
@@ -32,5 +26,5 @@ namespace PrintManagement.Application.Payloads.Mappers.Converters
 				IsActive = user.IsActive,
 			};
 		}
-	}
+    }
 }

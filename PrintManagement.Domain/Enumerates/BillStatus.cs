@@ -8,5 +8,8 @@ namespace PrintManagement.Domain.Enumerates
 {
 	public enum BillStatus
 	{
-	}
+        NotReceived = 0,
+        Refuse = 1,
+        Received = 2,
+    }
 }

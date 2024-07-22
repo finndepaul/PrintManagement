@@ -1,5 +1,5 @@
 ﻿using PrintManagement.Application.Payloads.RequestModels.UserRequests;
-using PrintManagement.Application.Payloads.ResponseModels.DataUsers;
+using PrintManagement.Application.Payloads.ResponseModels;
 using PrintManagement.Application.Payloads.Responses;
 
 namespace PrintManagement.Client.Services.Interface

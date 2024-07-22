@@ -8,6 +8,7 @@ namespace PrintManagement.Domain.Enumerates
 {
 	public enum PrintJobStatus
 	{
-
-	}
+		Waiting = 0,
+        Success = 1
+    }
 }

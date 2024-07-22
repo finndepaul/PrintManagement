@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PrintManagement.Domain.Validations
 {
-	public class RegisterValidation
+	public class CommonValidation
 	{
 		public static bool IsValidEmail(string email)
 		{

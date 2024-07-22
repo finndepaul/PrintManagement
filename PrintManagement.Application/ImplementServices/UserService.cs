@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Org.BouncyCastle.Asn1.Ocsp;
 using PrintManagement.Application.Handle.HandleEmail;
 using PrintManagement.Application.InterfaceServices;
 using PrintManagement.Application.Payloads.Mappers.Converters;
 using PrintManagement.Application.Payloads.RequestModels.UserRequests;
-using PrintManagement.Application.Payloads.ResponseModels.DataUsers;
+using PrintManagement.Application.Payloads.ResponseModels;
 using PrintManagement.Application.Payloads.Responses;
 using PrintManagement.Domain.Entities;
 using PrintManagement.Domain.InterfaceRepositories;
@@ -11,26 +12,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace PrintManagement.Application.ImplementServices
 {
-	public class UserService : IUserService
+    public class UserService : IUserService
 	{
 		private readonly IBaseRepository<User> _baseUserRepository;
 		private readonly IBaseRepository<ConfirmEmail> _baseConfirmEmailRepository;
+		private readonly IBaseRepository<Team> _baseTeamRepository;
 		private readonly IUserRepository _userRepository;
 		private readonly IEmailService _emailService;
 		private readonly UserConverter _userConverter;
+		private readonly IHttpContextAccessor _contextAccessor;
 
-		public UserService(IBaseRepository<User> baseUserRepository, IBaseRepository<ConfirmEmail> baseConfirmEmailRepository, UserConverter userConverter, IUserRepository userRepository, IEmailService emailService)
+		public UserService(IBaseRepository<User> baseUserRepository, IBaseRepository<ConfirmEmail> baseConfirmEmailRepository, UserConverter userConverter, IUserRepository userRepository, IEmailService emailService, IHttpContextAccessor contextAccesser, IBaseRepository<Team> baseTeamRepository)
 		{
 			_baseUserRepository = baseUserRepository;
 			_baseConfirmEmailRepository = baseConfirmEmailRepository;
 			_userConverter = userConverter;
 			_userRepository = userRepository;
 			_emailService = emailService;
+			_contextAccessor = contextAccesser;
+			_baseTeamRepository = baseTeamRepository;
 		}
 
 		public async Task<ResponseObject<DataResponseUser>> ChangePassword(Guid userId, ChangePasswordRequest request, CancellationToken cancellationToken)
@@ -64,7 +70,7 @@ namespace PrintManagement.Application.ImplementServices
 				{
 					Status = StatusCodes.Status200OK,
 					Message = "Đổi mật khẩu thành công",
-					Data = await _userConverter.EntityToDTOAsync(user, cancellationToken)
+					Data = await _userConverter.EntityToDTOAsync(user)
 				};
 			}
 			catch (Exception ex)
@@ -78,7 +84,41 @@ namespace PrintManagement.Application.ImplementServices
 			}
 		}
 
-		public async Task<string> ConfirmCreateNewPassword(CreateNewPasswordRequest request, CancellationToken cancellationToken)
+        public async Task<string> ChangeTeamForUser(Guid teamId, Guid userId, CancellationToken cancellationToken)
+        {
+            var currentUser = _contextAccessor.HttpContext.User;
+            try
+            {
+                if (!currentUser.Identity.IsAuthenticated)
+                {
+                    return "Token người dùng không hợp lệ";
+                }
+                if (!currentUser.IsInRole("Admin"))
+                {
+                    return "Bạn không có quyền thực hiện chức năng này";
+                }
+                var model = await GetUserById(userId, cancellationToken);
+				if (model == null)
+				{
+					return "Không tìm thấy người dùng này";
+				}
+				var team = await _baseTeamRepository.GetByIdAsync(x => x.Id == teamId, cancellationToken);
+                if (team == null)
+                {
+					return "Không tìm thấy phòng ban này";
+                }
+                model.TeamId = teamId;
+				model.UpdateTime = DateTime.Now;
+				var result = await _baseUserRepository.UpdateAsync(model, cancellationToken);
+				return "Chuyển phòng ban cho nhân viên thành công";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public async Task<string> ConfirmCreateNewPassword(CreateNewPasswordRequest request, CancellationToken cancellationToken)
 		{
 			try
 			{
@@ -135,7 +175,55 @@ namespace PrintManagement.Application.ImplementServices
 				return ex.Message;
 			}
 		}
-		private string GenerateCodeActive()
+
+        public async Task<IQueryable<DataResponseUser>> GetAllUser(CancellationToken cancellationToken)
+        {
+            var currentUser = _contextAccessor.HttpContext.User;
+            if (!currentUser.Identity.IsAuthenticated)
+            {
+                return null;
+            }
+
+            // Kiểm tra nếu người dùng có quyền "Admin" hoặc "Manager"
+            if (currentUser.IsInRole("Admin") || currentUser.IsInRole("Manager"))
+            {
+                var model = await _baseUserRepository.GetAllAsync(null, cancellationToken);
+                var resultList = new List<DataResponseUser>();
+
+                foreach (var item in model)
+                {
+                    var dataResponseTeam = await _userConverter.EntityToDTOAsync(item);
+                    resultList.Add(dataResponseTeam);
+                }
+
+                return resultList.AsQueryable();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        public async Task<User> GetUserById(Guid userId, CancellationToken cancellationToken)
+        {
+            var currentUser = _contextAccessor.HttpContext.User;
+            if (!currentUser.Identity.IsAuthenticated)
+            {
+                return null;
+            }
+            if (currentUser.IsInRole("Admin") || currentUser.IsInRole("Manager"))
+            {
+                var model = await _baseUserRepository.GetByIdAsync(x => x.Id == userId, cancellationToken);
+                return model;
+            }
+			else
+			{
+				return null;
+			}
+        }
+
+        private string GenerateCodeActive()
 		{
 			string str = "DuyDong_" + DateTime.Now.Ticks.ToString();
 			return str;

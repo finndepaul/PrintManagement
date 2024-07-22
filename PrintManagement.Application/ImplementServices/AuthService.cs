@@ -5,7 +5,7 @@ using PrintManagement.Application.Handle.HandleEmail;
 using PrintManagement.Application.InterfaceServices;
 using PrintManagement.Application.Payloads.Mappers.Converters;
 using PrintManagement.Application.Payloads.RequestModels.UserRequests;
-using PrintManagement.Application.Payloads.ResponseModels.DataUsers;
+using PrintManagement.Application.Payloads.ResponseModels;
 using PrintManagement.Application.Payloads.Responses;
 using PrintManagement.Domain.Entities;
 using PrintManagement.Domain.InterfaceRepositories;
@@ -22,7 +22,7 @@ using BCryptNet = BCrypt.Net.BCrypt; // using tay
 
 namespace PrintManagement.Application.ImplementServices
 {
-	public class AuthService : IAuthService
+    public class AuthService : IAuthService
 	{
 		private readonly IConfiguration _configuration;
 		private readonly UserConverter _userConverter;
@@ -51,7 +51,7 @@ namespace PrintManagement.Application.ImplementServices
 		{
 			try
 			{
-				if (!RegisterValidation.IsValidEmail(request.Email))
+				if (!CommonValidation.IsValidEmail(request.Email))
 				{
 					return new ResponseObject<DataResponseUser>
 					{
@@ -60,7 +60,7 @@ namespace PrintManagement.Application.ImplementServices
 						Data = null
 					};
 				}
-				if (!RegisterValidation.IsValidPhoneNumber(request.PhoneNumber))
+				if (!CommonValidation.IsValidPhoneNumber(request.PhoneNumber))
 				{
 					return new ResponseObject<DataResponseUser>
 					{
@@ -127,7 +127,7 @@ namespace PrintManagement.Application.ImplementServices
 				{
 					Status = StatusCodes.Status201Created,
 					Message = "Bạn đã gửi yêu cầu đăng kí! Vui lòng nhận mã xác nhận tại email để đăng kí tài khoản <3",
-					Data = await _userConverter.EntityToDTOAsync(user, cancellationToken)
+					Data = await _userConverter.EntityToDTOAsync(user)
 				};
 
 			}
@@ -182,6 +182,7 @@ namespace PrintManagement.Application.ImplementServices
 				 new Claim("UserName", user.UserName.ToString()),
 				 new Claim("Email", user.Email.ToString()),
 				 new Claim("PhoneNumber", user.PhoneNumber.ToString()),
+				 new Claim("TeamId", user.TeamId.ToString()),
 			};
 			foreach (var permission in permissions)
 			{

@@ -24,15 +24,31 @@ namespace PrintManagement.API.Extensions
 			services.AddScoped<IBaseRepository<Role>, BaseRepository<Role>>();	
 			services.AddScoped<IBaseRepository<RefreshToken>, BaseRepository<RefreshToken>>();	
 			services.AddScoped<IBaseRepository<Permissions>, BaseRepository<Permissions>>();	
+			services.AddScoped<IBaseRepository<Team>, BaseRepository<Team>>();	
+			services.AddScoped<IBaseRepository<Customer>, BaseRepository<Customer>>();	
+			services.AddScoped<IBaseRepository<Project>, BaseRepository<Project>>();	
 
-			services.AddScoped<IDbContext, AppDbContext>();
 			services.AddTransient<IEmailService, EmailService>(); // xóa using mailkit
 			services.AddTransient<IAuthService, AuthService>();
 			services.AddTransient<IUserService, UserService>();
-			services.AddTransient<IUserRepository, UserRepository>();
-			services.AddTransient<UserConverter>();
+			services.AddTransient<ITeamService, TeamService>();
+			services.AddTransient<ICustomerService, CustomerService>();
+			services.AddTransient<IProjectService, ProjectService>();
 
-			return services;
+			services.AddTransient<IUserRepository, UserRepository>();
+			services.AddTransient<ITeamRepository, TeamRepository>();
+			services.AddTransient<ICustomerRepostory, CustomerRepository>();
+			services.AddTransient<IProjectRepository, ProjectRepository>();
+
+			services.AddTransient<UserConverter>();
+			services.AddTransient<TeamConverter>();
+			services.AddTransient<CustomerConverter>();
+			services.AddTransient<ProjectConverter>();
+
+            services.AddScoped<IDbContext, AppDbContext>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            return services;
 		}
 	}
 }

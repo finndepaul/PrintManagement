@@ -8,6 +8,7 @@ namespace PrintManagement.Domain.Enumerates
 {
 	public enum ResourceType
 	{
-
+        Stationery = 0,
+        Machine = 1
 	}
 }
