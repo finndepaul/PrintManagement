@@ -23,31 +23,31 @@ namespace PrintManagement.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
         {
-            return Ok(await _teamService.GetAllAsync(cancellationToken));
+            return Ok(await _teamService.GetAllTeam(cancellationToken));
         }
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> CreateTeamAsync(TeamCreateRequest request, CancellationToken cancellationToken)
         {
-            return Ok(await _teamService.CreateTeamAsync(request, cancellationToken));
+            return Ok(await _teamService.CreateTeam(request, cancellationToken));
         }
         [HttpPut]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> UpdateTeamAsync(TeamUpdateRequest request, CancellationToken cancellationToken)
         {
-            return Ok(await _teamService.UpdateTeamAsync(request, cancellationToken));
+            return Ok(await _teamService.UpdateTeam(request, cancellationToken));
         }
         [HttpDelete]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteTeamAsync(TeamDeleteRequest request, CancellationToken cancellationToken)
         {
-            return Ok(await _teamService.DeleteTeamAsync(request, cancellationToken));
+            return Ok(await _teamService.DeleteTeam(request, cancellationToken));
         }
         [HttpGet]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> SwapManagerAsync(Guid teamId, Guid managerId, CancellationToken cancellationToken)
         {
-            return Ok(await _teamService.SwapManagerAsync(teamId, managerId, cancellationToken));
+            return Ok(await _teamService.SwapManager(teamId, managerId, cancellationToken));
         }
     }
 }

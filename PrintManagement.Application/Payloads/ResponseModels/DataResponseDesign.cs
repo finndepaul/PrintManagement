@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace PrintManagement.Application.Payloads.ResponseModels
 {
-    public class DataResponseProject
+    public class DataResponseDesign
     {
         public Guid Id { get; set; }
-        public string ProjectName { get; set; }
-        public string EmployeeName { get; set; } //Nhân viên phụ trách project
-        public DateTime StartDate { get; set; }
-        public DateTime ExpectedEndDate { get; set; }
+        public string DesignerName { get; set; }
+        public string FilePath { get; set; }
+        public DateTime DesignTime { get; set; }
+        public string DesignStatus { get; set; }
     }
 }

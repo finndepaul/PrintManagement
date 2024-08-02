@@ -33,7 +33,7 @@ namespace PrintManagement.Application.ImplementServices
             _teamRepository = teamRepository;
         }
 
-        public async Task<ResponseObject<DataResponseTeam>> CreateTeamAsync(TeamCreateRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseObject<DataResponseTeam>> CreateTeam(TeamCreateRequest request, CancellationToken cancellationToken)
         {
             var currentUser = _contextAccessor.HttpContext.User;
             try
@@ -83,7 +83,7 @@ namespace PrintManagement.Application.ImplementServices
             }
         }
 
-        public async Task<string> DeleteTeamAsync(TeamDeleteRequest request, CancellationToken cancellationToken)
+        public async Task<string> DeleteTeam(TeamDeleteRequest request, CancellationToken cancellationToken)
         {
             var currentUser = _contextAccessor.HttpContext.User;
             try
@@ -115,7 +115,7 @@ namespace PrintManagement.Application.ImplementServices
             }
         }
 
-        public async Task<IQueryable<DataResponseTeam>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<IQueryable<DataResponseTeam>> GetAllTeam(CancellationToken cancellationToken)
         {
             var currentUser = _contextAccessor.HttpContext.User;
             if (!currentUser.Identity.IsAuthenticated)
@@ -139,7 +139,7 @@ namespace PrintManagement.Application.ImplementServices
             return resultList.AsQueryable();
         }
 
-        public async Task<string> SwapManagerAsync(Guid teamId, Guid managerId, CancellationToken cancellationToken)
+        public async Task<string> SwapManager(Guid teamId, Guid managerId, CancellationToken cancellationToken)
         {
             var currentUser = _contextAccessor.HttpContext.User;
             try
@@ -162,7 +162,7 @@ namespace PrintManagement.Application.ImplementServices
                 {
                     return "Không tìm thấy người dùng này";
                 }
-                await _teamRepository.AddRoleForUserAsync(managerId, cancellationToken); // thêm role và xóa role
+                await _teamRepository.AddRoleForUserAsync(managerId, cancellationToken);
                 team.UpdateTime = DateTime.UtcNow;
                 team.ManagerId = managerId;
                 await _baseTeamRepository.UpdateAsync(team, cancellationToken);
@@ -174,7 +174,7 @@ namespace PrintManagement.Application.ImplementServices
             }
         }
 
-        public async Task<ResponseObject<DataResponseTeam>> UpdateTeamAsync(TeamUpdateRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseObject<DataResponseTeam>> UpdateTeam(TeamUpdateRequest request, CancellationToken cancellationToken)
         {
             var currentUser = _contextAccessor.HttpContext.User;
             try

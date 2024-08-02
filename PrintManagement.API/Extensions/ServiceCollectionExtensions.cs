@@ -27,6 +27,12 @@ namespace PrintManagement.API.Extensions
 			services.AddScoped<IBaseRepository<Team>, BaseRepository<Team>>();	
 			services.AddScoped<IBaseRepository<Customer>, BaseRepository<Customer>>();	
 			services.AddScoped<IBaseRepository<Project>, BaseRepository<Project>>();	
+			services.AddScoped<IBaseRepository<Design>, BaseRepository<Design>>();	
+			services.AddScoped<IBaseRepository<PrintJobs>, BaseRepository<PrintJobs>>();	
+			services.AddScoped<IBaseRepository<ResourceForPrintJob>, BaseRepository<ResourceForPrintJob>>();	
+			services.AddScoped<IBaseRepository<ResourcePropertyDetail>, BaseRepository<ResourcePropertyDetail>>();	
+			services.AddScoped<IBaseRepository<Bill>, BaseRepository<Bill>>();	
+			services.AddScoped<IBaseRepository<Delivery>, BaseRepository<Delivery>>();	
 
 			services.AddTransient<IEmailService, EmailService>(); // xóa using mailkit
 			services.AddTransient<IAuthService, AuthService>();
@@ -34,6 +40,9 @@ namespace PrintManagement.API.Extensions
 			services.AddTransient<ITeamService, TeamService>();
 			services.AddTransient<ICustomerService, CustomerService>();
 			services.AddTransient<IProjectService, ProjectService>();
+			services.AddTransient<IDesignService, DesignService>();
+			services.AddTransient<IResourseForPrintjobService, ResourseForPrintjobService>();
+			services.AddTransient<IDeliveryService, DeliveryService>();
 
 			services.AddTransient<IUserRepository, UserRepository>();
 			services.AddTransient<ITeamRepository, TeamRepository>();
@@ -44,6 +53,7 @@ namespace PrintManagement.API.Extensions
 			services.AddTransient<TeamConverter>();
 			services.AddTransient<CustomerConverter>();
 			services.AddTransient<ProjectConverter>();
+			services.AddTransient<DesignConverter>();
 
             services.AddScoped<IDbContext, AppDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

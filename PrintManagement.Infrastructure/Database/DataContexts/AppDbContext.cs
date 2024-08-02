@@ -394,6 +394,17 @@ namespace PrintManagement.Infrastructure.Database.DataContexts
                         Quantity = 1
                     }
                 );
+
+            // shipping Method
+            modelBuilder.Entity<ShippingMethod>().HasData
+                (
+                    new ShippingMethod
+                    {
+                        Id = Guid.Parse("2ddfd76b-d034-4d48-be98-b651d59d1538"),
+                        ShippingMethodName = "Nhanh",
+                    }
+                );
+            
         }
         #endregion
     }

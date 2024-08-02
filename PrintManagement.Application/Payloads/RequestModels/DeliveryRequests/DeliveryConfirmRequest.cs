@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrintManagement.Domain.Enumerates
+namespace PrintManagement.Application.Payloads.RequestModels.DeliveryRequests
 {
-	public enum BillStatus
-	{
-        Waiting = 0,
-        Delivering = 1,
+    public enum DeliveryConfirmRequest
+    {
         NotReceived = 2,
         Refuse = 3,
         Received = 4,

@@ -29,7 +29,7 @@ namespace PrintManagement.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> CreateCustomerAsync(CustomerCreateRequest request, CancellationToken cancellationToken)
         {
-            return Ok(await _customerService.CreateCustomerAsync(request, cancellationToken));
+            return Ok(await _customerService.CreateCustomer(request, cancellationToken));
         }
     }
 }

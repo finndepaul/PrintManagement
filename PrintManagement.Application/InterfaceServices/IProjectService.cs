@@ -12,6 +12,7 @@ namespace PrintManagement.Application.InterfaceServices
     public interface IProjectService
     {
         Task<IQueryable<DataResponseProject>> GetAllProject(CancellationToken cancellationToken);
-        Task<ResponseObject<DataResponseProject>> CreateProjectAsync(ProjectCreateRequest request, CancellationToken cancellationToken);
+        Task<DataResponseProjectDetail> GetProjectById(Guid projectId, CancellationToken cancellationToken);
+        Task<ResponseObject<DataResponseProject>> CreateProject(ProjectCreateRequest request, CancellationToken cancellationToken);
     }
 }

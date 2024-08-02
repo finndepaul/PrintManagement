@@ -8,6 +8,7 @@ namespace PrintManagement.Application.Payloads.ResponseModels
 {
     public class DataResponseUser
     {
+        public Guid Id { get; set; }
         public string FullName { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string Avatar { get; set; }

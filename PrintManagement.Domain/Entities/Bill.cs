@@ -17,11 +17,11 @@ namespace PrintManagement.Domain.Entities
         public string TradingCode { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
-        public Guid EmployeeId { get; set; }
+        public Guid? EmployeeId { get; set; }
 
 		// khóa ngoại
 		public virtual Customer Customer { get; set; }
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
         public virtual Project Project { get; set; }
     }
 }

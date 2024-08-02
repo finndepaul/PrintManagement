@@ -18,16 +18,23 @@ namespace PrintManagement.API.Controllers
         {
             _projectService = projectService;
         }
+        [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> CreateProjectAsync(ProjectCreateRequest request, CancellationToken cancellationToken)
+        {
+            return Ok(await _projectService.CreateProject(request, cancellationToken));
+        }
         [HttpGet]
         public async Task<IActionResult> GetAllProject(CancellationToken cancellationToken)
         {
             return Ok(await _projectService.GetAllProject(cancellationToken));
         }
-        [HttpPost]
+        [HttpGet]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> CreateProjectAsync(ProjectCreateRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetProjectById([FromQuery] Guid projectId, CancellationToken cancellationToken)
         {
-            return Ok(await _projectService.CreateProjectAsync(request, cancellationToken));
+            return Ok(await _projectService.GetProjectById(projectId, cancellationToken));
         }
+        
     }
 }

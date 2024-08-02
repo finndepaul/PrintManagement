@@ -32,7 +32,7 @@ namespace PrintManagement.Application.ImplementServices
             _customerConverter = customerConverter;
         }
 
-        public async Task<ResponseObject<DataResponseCustomer>> CreateCustomerAsync(CustomerCreateRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseObject<DataResponseCustomer>> CreateCustomer(CustomerCreateRequest request, CancellationToken cancellationToken)
         {
             if (await _customerRepostory.GetCustomerByPhoneNumberAsync(request.PhoneNumber, cancellationToken) != null)
             {

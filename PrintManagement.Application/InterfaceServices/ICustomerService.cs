@@ -12,6 +12,6 @@ namespace PrintManagement.Application.InterfaceServices
     public interface ICustomerService
     {
         Task<IQueryable<DataResponseCustomer>> GetAllCustomer(CancellationToken cancellationToken);
-        Task<ResponseObject<DataResponseCustomer>> CreateCustomerAsync(CustomerCreateRequest request, CancellationToken cancellationToken);
+        Task<ResponseObject<DataResponseCustomer>> CreateCustomer(CustomerCreateRequest request, CancellationToken cancellationToken);
     }
 }

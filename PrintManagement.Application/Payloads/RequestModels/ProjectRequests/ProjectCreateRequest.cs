@@ -11,6 +11,7 @@ namespace PrintManagement.Application.Payloads.RequestModels.ProjectRequests
     {
         public string ProjectName { get; set; }
         public string RequestDescriptionFromCustomer { get; set; }
+        public DateTime ExpectedEndDate { get; set; }
         public Guid CustomerId { get; set; }
         public Guid EmployeeId { get; set; }
     }

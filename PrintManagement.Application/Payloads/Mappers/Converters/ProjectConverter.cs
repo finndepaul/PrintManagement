@@ -22,13 +22,11 @@ namespace PrintManagement.Application.Payloads.Mappers.Converters
         {
             return new DataResponseProject
             {
+                Id = project.Id,
                 ProjectName = project.ProjectName,
-                RequestDescriptionFromCustomer = project.RequestDescriptionFromCustomer,
-                CustomerName = project.CustomerId != null ? await _projectRepository.GetCustomerNameAsync(project.CustomerId, cancellationToken) : "N/A",
+                EmployeeName = project.EmployeeId != null ? await _projectRepository.GetLeaderNameAsync(project.EmployeeId, cancellationToken) : "N/A",
                 StartDate = project.StartDate,
                 ExpectedEndDate = project.ExpectedEndDate,
-                EmployeeName = project.EmployeeId != null ? await _projectRepository.GetLeaderNameAsync(project.EmployeeId, cancellationToken) : "N/A",
-                ProjectStatus = project.ProjectStatus.ToString(),
             };
         }
     }

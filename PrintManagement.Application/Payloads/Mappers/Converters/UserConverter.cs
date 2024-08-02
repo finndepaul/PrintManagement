@@ -16,6 +16,7 @@ namespace PrintManagement.Application.Payloads.Mappers.Converters
 		{
 			return new DataResponseUser
 			{
+				Id = user.Id,
 				Avatar = user.Avatar,
 				DateOfBirth = user.DateOfBirth,
 				Email = user.Email,

@@ -9,6 +9,7 @@ namespace PrintManagement.Domain.Enumerates
 	public enum DesignStatus
 	{
         NotYetApproved = 0,
-        Approved = 1,
+        Refuse = 1,
+        Approved = 2,
     }
 }

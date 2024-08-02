@@ -22,6 +22,7 @@ namespace PrintManagement.Application.Payloads.Mappers.Converters
         {
             return new DataResponseTeam
             {
+                Id = team.Id,
                 Name = team.Name,
                 Description = team.Description,
                 NumberOfMember = await _teamRepository.GetNumberOfMemberAsync(team.Id, cancellationToken),
